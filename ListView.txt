@@ -1,0 +1,60 @@
+  //ListView.builder, ListView Or add a parent SingleChildScrollView
+        child: ListView.builder(
+          itemCount: li.length, //Or count if item need to show it.
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(4),
+              child: Card(
+                color: g,
+                shadowColor: w,
+                elevation: 10,
+                //Or container
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          MyText(li[index].name, s20),
+                          MyText(' ${li[index].height}', s20),
+                        ],
+                      ),
+                      MyText(' ${li[index].date}', s24)
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+          //   children: <Widget>[
+          //     ...li.map((val) {
+          //       //Or container
+          //       return Padding(
+          //         padding: const EdgeInsets.all(4),
+          //         child: Card(
+          //           color: g,
+          //           shadowColor: w,
+          //           elevation: 10,
+          //           //Or container
+          //           child: Padding(
+          //             padding: const EdgeInsets.all(8.0),
+          //             child: Column(
+          //               children: <Widget>[
+          //                 Row(
+          //                   // crossAxisAlignment: CrossAxisAlignment.center,
+          //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //                   children: <Widget>[
+          //                     MyText(val.name, s20),
+          //                     MyText(' ${val.height}', s20),
+          //                   ],
+          //                 ),
+          //                 MyText(' ${val.date}', s24)
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     })
+          //   ],
