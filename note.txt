@@ -1,0 +1,79 @@
+--------------------
+Class...
+
+StatelessWidget.
+MaterialApp.
+Scaffodd.
+Center.
+Text.
+---------------------
+
+----
+AppBar
+leading
+title
+actions
+ Icon
+----
+
+----
+Colors. ....
+Container child: children... .
+alignment: Alignment.center, spaceAround, spaceEvenly, spaceBetween.
+----
+
+----
+Column
+Row
+mainAxisAlignment
+----
+
+----
+FontWight
+FontStyle
+height
+shadow : color, bluerRadius, offset
+decoraion : TextDecoration[.combain,.underline,overline,.lineThrough].
+decorationStyle: TextDecorationStyle [.dotted,.solid,.dashed,.wavy,.double]
+----
+TextButton: [onPressed, child]
+TextButton.icon : [onPressed, icon, label]
+OutlinedButton...
+ElevatedButton...
+----
+
+----
+In button :
+style : backgroundColor [MaterialStateProperty.all(Colors.###)], padding:[MaterialStateProperty.[all,fromLTRB(....)]]
+using function to show  msg.
+appBar : elevation: double.
+----
+Floating action button...
+FloatingActionButton
+FloatingActionButton.extended [label,icon, backgroundColor, foregroundColor, shape[....borderRadius,side]]
+BorderRadius.all ([Radius.[circular,elliptical,zero]])
+floatingActionButtonLocation. ### centerFloat
+----
+StatefullWidget
+SetState
+call a function on pressed.
+----
+Container of widgets.
+TextField: decoraion => InputDecoration[labelText, hintText, labelStyle,hintStyle,maxLines,prefixText,suffixText] #TextStyle[fontSize],
+keyboardType: TextInputType.[text,name,...]
+SingleChildScrollView
+suffixIcon
+fillColor
+filled
+enabledBorder: OutlineInputBorder...
+
+----
+textAlign: textAlign.[center,...] 
+TextField: controller
+----
+
+----
+----
+
+
+

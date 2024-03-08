@@ -1,0 +1,42 @@
+ body: Container(
+            alignment: Alignment.center,
+            // color: Colors.blueAccent,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Hot data',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.red,
+                    // backgroundColor: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    letterSpacing: 10,
+                    wordSpacing: 20,
+                    shadows: const <Shadow>[
+                      Shadow(
+                          color: Colors.blue,
+                          offset: Offset(0, 2),
+                          blurRadius: 9),
+                      Shadow(
+                          color: Colors.blue,
+                          offset: Offset(0, 2),
+                          blurRadius: 9),
+                      Shadow(
+                          color: Colors.blue,
+                          offset: Offset(0, 2),
+                          blurRadius: 9),
+                    ],
+                    decoration: TextDecoration.combine(
+                        [TextDecoration.underline, TextDecoration.overline]),
+                      decorationColor: Colors.blueGrey,
+                      decorationStyle: TextDecorationStyle.solid,
+                      decorationThickness: 4
+                  ),
+                ),
+                const Text('Data'),
+                const Text('Data'),
+                const Text('Data'),
+              ],
+            )),
