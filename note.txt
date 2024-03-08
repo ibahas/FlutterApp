@@ -76,6 +76,10 @@ padding:<Widget> : padding : EdgeInsets[all,fromLTRB,only[top,right...]]
 
 ----
 
+Convert Text to class MyText()
+
+----
+
 ----
 
 

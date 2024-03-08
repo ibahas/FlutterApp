@@ -1,5 +1,9 @@
+// import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
+import 'text.dart';
+
 // import 'package:flutter_application_1/lesson_three.dart';
 // import 'package:flutter_application_1/lesson_one.dart';
 // import 'package:flutter_application_1/lesson_two.dart';
@@ -41,7 +45,7 @@ class _MyHomePage extends State<MyHomePage> {
           ),
         ),
       ),
-      body:  Container(
+      body: Container(
         color: Colors.redAccent,
         // margin: const EdgeInsets.all(8)
         // margin: const EdgeInsets.fromLTRB(30, 10, 30, 8),
@@ -52,29 +56,21 @@ class _MyHomePage extends State<MyHomePage> {
         padding: const EdgeInsets.all(8.0),
         // height: double.infinity,
         // alignment: Alignment.center,
-        child: const Row(
+        child: Row(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Aaaaa',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 35,
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: MyText(
+                  'Aaaa',
+                  s,
+                )),
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Bbbbb',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 35,
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: MyText(
+                  'Bbbb',
+                  s2,
+                )),
           ],
         ),
       ),
