@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 
- 
- TextStyle s = const TextStyle(
+TextStyle s24 = const TextStyle(
   color: Colors.white,
- );
+  fontSize: 24,
+);
 
- TextStyle s2 = const TextStyle(
-  color: Colors.black,
- );
- 
+TextStyle s20 = const TextStyle(
+  color: Colors.white,
+  fontSize: 20,
+);
+
 class MyText extends StatelessWidget {
-  String _text;
-  TextStyle _style;
+  final String _text;
+  final TextStyle _style;
 
-  MyText(this._text, this._style);
+  const MyText(this._text, this._style, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      this._text,
+      _text,
       style: _style,
     );
   }

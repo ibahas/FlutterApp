@@ -10,12 +10,16 @@ import 'text.dart';
 
 void main() => runApp(const MyApp());
 
+Color w = Colors.white;
+Color b = Colors.black;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter app',
       theme: ThemeData(
         primarySwatch: Colors.green,
@@ -38,80 +42,43 @@ class _MyHomePage extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.yellowAccent,
-        title: const Text(
+        title: Text(
           'AppBar title',
           style: TextStyle(
-            color: Colors.black,
+            color: b,
           ),
         ),
       ),
+      //Rwo
+      // body: Container(
+      //   width: double.infinity,
+      //   color: b,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     // crossAxisAlignment: CrossAxisAlignment.start,
+      //     // crossAxisAlignment: CrossAxisAlignment.end,
+      //     // crossAxisAlignment: CrossAxisAlignment.stretch,
+      //     children: <Widget>[
+      //       Text('Text 1xxxx', style: TextStyle(color: w, fontSize: 20)),
+      //       MyText('Text 2', s20),
+      //     ],
+      //   ),
+      // ),
+      //Column
       body: Container(
-        // color: Colors.redAccent,
-        alignment: Alignment.center,
-        child: Stack(
-          // alignment: AlignmentDirectional.topEnd,
-          // alignment: AlignmentDirectional.topCenter,
-          // alignment: Alignment.topRight,
-          // alignment: Alignment.center,
-          // alignment: Alignment.centerRight,
-          alignment: Alignment.centerLeft,
+        width: 300,
+      //   width: double.infinity,
+        color: b,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: 400,
-              height: 400,
-              color: Colors.greenAccent,
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      MyText('Aaa', s),
-                      MyText('Bbb', s),
-                      MyText('Ccc', s),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      MyText('Aaa', s),
-                      MyText('Bbb', s),
-                      MyText('Ccc', s),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            Text('Text 1xxxx', style: TextStyle(color: w, fontSize: 20)),
+            MyText('Text 2', s20),
           ],
         ),
-        // margin: const EdgeInsets.all(8)
-        // margin: const EdgeInsets.fromLTRB(30, 10, 30, 8),
-        // margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 18.0),
-        // margin: const EdgeInsets.only(top: 10),
-        // // padding: EdgeInsets.fromLTRB(left, top, right, bottom),
-        // // padding: const EdgeInsets.only(top: 10, bottom: 10),
-        // padding: const EdgeInsets.all(8.0),
-        // // height: double.infinity,
-        // // alignment: Alignment.center,
-        // child: Row(
-        //   // mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-        //     Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: MyText(
-        //           'Aaaa',
-        //           s,
-        //         )),
-        //     Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: MyText(
-        //           'Bbbb',
-        //           s2,
-        //         )),
-        //   ],
-        // ),
       ),
     );
   }
