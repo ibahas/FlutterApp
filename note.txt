@@ -84,6 +84,9 @@ Stack: alignment:[AlignmentDirectional.[topStart,topCenter...], Alignment.[topRi
 
 ----
 
+Map function in list.
+List<Info> li =[]
+
 ----
 
 ----

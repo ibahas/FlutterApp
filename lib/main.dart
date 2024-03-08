@@ -1,8 +1,10 @@
 // import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/info.dart';
+import 'package:flutter_application_1/text.dart';
 // import 'package:flutter/widgets.dart';
-import 'text.dart';
+// import 'text.dart';
 
 // import 'package:flutter_application_1/lesson_three.dart';
 // import 'package:flutter_application_1/lesson_one.dart';
@@ -37,6 +39,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePage extends State<MyHomePage> {
+  final List<Info> li = [
+    Info(name: 'Ibrahim1', height: 170, date: DateTime.now()),
+    Info(name: 'Ibrahim2', height: 175, date: DateTime.now()),
+    Info(name: 'Ibrahim3', height: 180, date: DateTime.now()),
+    Info(name: 'Ibrahim4', height: 190, date: DateTime.now()),
+    Info(name: 'Ibrahim5', height: 195, date: DateTime.now()),
+  ];
+
+  // final x1 = Info(name: 'Ibrahim1', height: 175, date: DateTime.now());
+  // final x2 = Info(name: 'Ibrahim2', height: 180, date: DateTime.now());
+  // final x3 = Info(name: 'Ibrahim3', height: 185, date: DateTime.now());
+  // final x4 = Info(name: 'Ibrahim4', height: 190, date: DateTime.now());
+  // final x5 = Info(name: 'Ibrahim5', height: 195, date: DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,36 +65,64 @@ class _MyHomePage extends State<MyHomePage> {
           ),
         ),
       ),
-      //Rwo
-      // body: Container(
-      //   width: double.infinity,
-      //   color: b,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     // crossAxisAlignment: CrossAxisAlignment.start,
-      //     // crossAxisAlignment: CrossAxisAlignment.end,
-      //     // crossAxisAlignment: CrossAxisAlignment.stretch,
-      //     children: <Widget>[
-      //       Text('Text 1xxxx', style: TextStyle(color: w, fontSize: 20)),
-      //       MyText('Text 2', s20),
-      //     ],
-      //   ),
-      // ),
-      //Column
       body: Container(
-        width: 300,
-      //   width: double.infinity,
         color: b,
+        // child: SingleChildScrollView(
+        //   child: Column(
+        //     children: [
+        //       ...li.map(
+        //         (e) => Row(
+        //           children: <Widget>[
+        //             MyText(e.name, s20),
+        //             MyText(' ${e.height}', s20),
+        //             MyText(' ${e.date}', s20),
+        //           ],
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text('Text 1xxxx', style: TextStyle(color: w, fontSize: 20)),
-            MyText('Text 2', s20),
+            ...li.map((val) {
+              return Container(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        MyText(val.name, s20),
+                        MyText(' ${val.height}', s20),
+                      ],
+                    ),
+                    MyText(' ${val.date}', s24)
+                  ],
+                ),
+              );
+            })
           ],
         ),
+        // child: Column(
+        //   children: <Widget>[
+        //     ...li.map(
+        //       (e) => Row(
+        //         children: <Widget>[
+        //           MyText(e.name, s20),
+        //           MyText(' ${e.height}', s20),
+        //           MyText(' ${e.date}', s20),
+        //         ],
+        //       ),
+        //     )
+        //   ],
+        // ),
+        // child: Column(
+        //   children: [
+        //     MyText(x1.name, s20),
+        //     MyText(x2.name, s20),
+        //   ],
+        // ),
       ),
     );
   }
