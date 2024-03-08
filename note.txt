@@ -80,6 +80,12 @@ Convert Text to class MyText()
 
 ----
 
+Stack: alignment:[AlignmentDirectional.[topStart,topCenter...], Alignment.[topRight,topLeft,centerLeft...]]
+
+----
+
+----
+
 ----
 
 
