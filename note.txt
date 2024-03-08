@@ -90,6 +90,10 @@ List<Info> li =[]
 ----
 ListView,ListView.builder[itemCount,itemBuilder#return...]
 ----
+----
+Ex: Using Theme...Theme.of(ctx).cardColor.
+ShowModalBottomSheet().
+----
 
 
 

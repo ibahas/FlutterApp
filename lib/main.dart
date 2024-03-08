@@ -1,6 +1,7 @@
 // import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/info.dart';
 import 'package:flutter_application_1/text.dart';
 // import 'package:flutter/widgets.dart';
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter app',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        primaryColor: Colors.green,
+        cardColor: Colors.pinkAccent,
+        appBarTheme: const AppBarTheme(color: Colors.green),
+        // colorSchemeSeed: Colors.amber,
       ),
       home: const MyHomePage(),
     );
@@ -52,17 +57,49 @@ class _MyHomePage extends State<MyHomePage> {
     Info(name: 'Ibrahim9', height: 195, date: DateTime.now()),
   ];
 
-  // final x1 = Info(name: 'Ibrahim1', height: 175, date: DateTime.now());
-  // final x2 = Info(name: 'Ibrahim2', height: 180, date: DateTime.now());
-  // final x3 = Info(name: 'Ibrahim3', height: 185, date: DateTime.now());
-  // final x4 = Info(name: 'Ibrahim4', height: 190, date: DateTime.now());
-  // final x5 = Info(name: 'Ibrahim5', height: 195, date: DateTime.now());
+  void x(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        backgroundColor: Colors.white60,
+        builder: (_) {
+          return ListView.builder(
+            itemCount: li.length, //Or count if item need to show it.
+            itemBuilder: (_, index) {
+              return Padding(
+                padding: const EdgeInsets.all(4),
+                child: Card(
+                  color: Theme.of(ctx).cardColor,
+                  shadowColor: w,
+                  elevation: 10,
+                  //Or container
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            MyText(li[index].name, s20),
+                            MyText(' ${li[index].height}', s20),
+                          ],
+                        ),
+                        MyText(' ${li[index].date}', s24)
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellowAccent,
+        // backgroundColor: Colors.yellowAccent,
         title: Text(
           'AppBar title',
           style: TextStyle(
@@ -71,124 +108,20 @@ class _MyHomePage extends State<MyHomePage> {
         ),
       ),
       body: Container(
-        color: b,
-        // child: SingleChildScrollView(
-        //   child: Column(
-        //     children: [
-        //       ...li.map(
-        //         (e) => Row(
-        //           children: <Widget>[
-        //             MyText(e.name, s20),
-        //             MyText(' ${e.height}', s20),
-        //             MyText(' ${e.date}', s20),
-        //           ],
-        //         ),
-        //       )
-        //     ],
-        //   ),
-        // ),
-        // child: Column(
-        //   children: <Widget>[
-        //     ...li.map((val) {
-        //       return Container(
-        //         padding: const EdgeInsets.all(8),
-        //         child: Column(
-        //           children: <Widget>[
-        //             Row(
-        //               // crossAxisAlignment: CrossAxisAlignment.center,
-        //               mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //               children: <Widget>[
-        //                 MyText(val.name, s20),
-        //                 MyText(' ${val.height}', s20),
-        //               ],
-        //             ),
-        //             MyText(' ${val.date}', s24)
-        //           ],
-        //         ),
-        //       );
-        //     })
-        //   ],
-        // ),
-        //ListView.builder, ListView Or add a parent SingleChildScrollView
-        child: ListView.builder(
-          itemCount: li.length, //Or count if item need to show it.
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(4),
-              child: Card(
-                color: g,
-                shadowColor: w,
-                elevation: 10,
-                //Or container
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          MyText(li[index].name, s20),
-                          MyText(' ${li[index].height}', s20),
-                        ],
-                      ),
-                      MyText(' ${li[index].date}', s24)
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-          //   children: <Widget>[
-          //     ...li.map((val) {
-          //       //Or container
-          //       return Padding(
-          //         padding: const EdgeInsets.all(4),
-          //         child: Card(
-          //           color: g,
-          //           shadowColor: w,
-          //           elevation: 10,
-          //           //Or container
-          //           child: Padding(
-          //             padding: const EdgeInsets.all(8.0),
-          //             child: Column(
-          //               children: <Widget>[
-          //                 Row(
-          //                   // crossAxisAlignment: CrossAxisAlignment.center,
-          //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //                   children: <Widget>[
-          //                     MyText(val.name, s20),
-          //                     MyText(' ${val.height}', s20),
-          //                   ],
-          //                 ),
-          //                 MyText(' ${val.date}', s24)
-          //               ],
-          //             ),
-          //           ),
-          //         ),
-          //       );
-          //     })
-          //   ],
-        ),
-        // child: Column(
-        //   children: <Widget>[
-        //     ...li.map(
-        //       (e) => Row(
-        //         children: <Widget>[
-        //           MyText(e.name, s20),
-        //           MyText(' ${e.height}', s20),
-        //           MyText(' ${e.date}', s20),
-        //         ],
-        //       ),
-        //     )
-        //   ],
-        // ),
-        // child: Column(
-        //   children: [
-        //     MyText(x1.name, s20),
-        //     MyText(x2.name, s20),
-        //   ],
-        // ),
+        color: Colors.white,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => x(context),
+        backgroundColor: w,
+        shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            side: BorderSide(
+              color: w,
+              width: 6,
+              style: BorderStyle.solid,
+            )),
+        child: const Icon(Icons.notifications),
+        // splashColor: Colors.green,
       ),
     );
   }
