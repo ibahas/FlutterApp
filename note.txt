@@ -72,7 +72,10 @@ textAlign: textAlign.[center,...]
 TextField: controller
 ----
 
+padding:<Widget> : padding : EdgeInsets[all,fromLTRB,only[top,right...]]
+
 ----
+
 ----
 
 
