@@ -123,3 +123,16 @@ Using setState.
 And show value.
 -----
 
+-----
+Expanded : 
+Expanded: flex: int ,child : Widget.
+The total of Expanded / one to get center or like it.
+-----
+
+-----
+GridView: gridDelegate[SliverGridDelegateWithMaxCrossAxisExtent => [maxCrossAxisExtent,childAspectRatio,mainAxisSpacing,crossAxisSpacing]], children : [];
+Container: BoxDecoration[gradient => [colors : [],begin,end]];
+color.withOpacity
+
+
+-----
