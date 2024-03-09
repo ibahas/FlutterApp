@@ -1,9 +1,10 @@
 // import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/info.dart';
 import 'package:flutter_application_1/text.dart';
+import 'package:intl/intl.dart';
 // import 'package:flutter/widgets.dart';
 // import 'text.dart';
 
@@ -29,7 +30,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         primaryColor: Colors.green,
         cardColor: Colors.pinkAccent,
-        appBarTheme: const AppBarTheme(color: Colors.green),
+        appBarTheme: const AppBarTheme(
+          color: Colors.green,
+          titleTextStyle: TextStyle(fontFamily: 'DejaVuSansMono-BoldOblique'),
+        ),
+        fontFamily: 'Galexica',
         // colorSchemeSeed: Colors.amber,
       ),
       home: const MyHomePage(),
@@ -61,6 +66,7 @@ class _MyHomePage extends State<MyHomePage> {
     showModalBottomSheet(
         context: ctx,
         backgroundColor: Colors.white60,
+        anchorPoint: const Offset(100, 300),
         builder: (_) {
           return ListView.builder(
             itemCount: li.length, //Or count if item need to show it.
@@ -84,7 +90,7 @@ class _MyHomePage extends State<MyHomePage> {
                             MyText(' ${li[index].height}', s20),
                           ],
                         ),
-                        MyText(' ${li[index].date}', s24)
+                        MyText(' ${DateFormat().format(li[index].date)}', s24)
                       ],
                     ),
                   ),
