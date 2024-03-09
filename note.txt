@@ -36,6 +36,8 @@ shadow : color, bluerRadius, offset
 decoraion : TextDecoration[.combain,.underline,overline,.lineThrough].
 decorationStyle: TextDecorationStyle [.dotted,.solid,.dashed,.wavy,.double]
 ----
+
+----
 TextButton: [onPressed, child]
 TextButton.icon : [onPressed, icon, label]
 OutlinedButton...
@@ -48,15 +50,21 @@ style : backgroundColor [MaterialStateProperty.all(Colors.###)], padding:[Materi
 using function to show  msg.
 appBar : elevation: double.
 ----
+
+----
 Floating action button...
 FloatingActionButton
 FloatingActionButton.extended [label,icon, backgroundColor, foregroundColor, shape[....borderRadius,side]]
 BorderRadius.all ([Radius.[circular,elliptical,zero]])
 floatingActionButtonLocation. ### centerFloat
 ----
+
+----
 StatefullWidget
 SetState
 call a function on pressed.
+----
+
 ----
 Container of widgets.
 TextField: decoraion => InputDecoration[labelText, hintText, labelStyle,hintStyle,maxLines,prefixText,suffixText] #TextStyle[fontSize],
@@ -66,38 +74,48 @@ suffixIcon
 fillColor
 filled
 enabledBorder: OutlineInputBorder...
+----
 
 ----
 textAlign: textAlign.[center,...] 
 TextField: controller
 ----
 
+----
 padding:<Widget> : padding : EdgeInsets[all,fromLTRB,only[top,right...]]
-
 ----
 
+
+----
 Convert Text to class MyText()
-
 ----
 
+----
 Stack: alignment:[AlignmentDirectional.[topStart,topCenter...], Alignment.[topRight,topLeft,centerLeft...]]
-
 ----
 
+----
 Map function in list.
 List<Info> li =[]
+----
 
 ----
 ListView,ListView.builder[itemCount,itemBuilder#return...]
 ----
+
 ----
 Ex: Using Theme...Theme.of(ctx).cardColor.
 ShowModalBottomSheet().
 ----
-Import a file font from external, in assets.
-appBarTheme: appBarTheme([color,titleTextStyle])
 
 ----
+Import a file font from external, in assets.
+appBarTheme: appBarTheme([color,titleTextStyle])
+----
+
+-----
+Images: Image.network(['path', fit: boxFit.[center,cover,fill]]) and from local added to assets in pubspec.yaml #images.
+-----
 
 
 

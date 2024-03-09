@@ -1,6 +1,7 @@
 // import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/info.dart';
 import 'package:flutter_application_1/text.dart';
@@ -114,7 +115,26 @@ class _MyHomePage extends State<MyHomePage> {
         ),
       ),
       body: Container(
-        color: Colors.white,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // alignment: Alignment.center,
+        height: double.infinity,
+        color: w,
+        child: Column(
+          children: [
+            Image.network(
+              'https://static.vecteezy.com/system/resources/thumbnails/025/181/412/small/picture-a-captivating-scene-of-a-tranquil-lake-at-sunset-ai-generative-photo.jpg',
+              height: 200,
+              width: 300,
+              // fit: BoxFit.cover, for Column
+              fit: BoxFit.fitWidth,
+            ),
+            Image.asset(
+              'assets/icons/user.png',
+              fit: BoxFit.fill,
+              height: 400,
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => x(context),
