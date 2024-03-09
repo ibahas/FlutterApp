@@ -102,6 +102,25 @@ class _MyHomePage extends State<MyHomePage> {
         });
   }
 
+  late DateTime _selectedDate;
+
+  void _datePicker() {
+    showDatePicker(
+      context: context,
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+      initialDate: DateTime.utc(2024, 3, 3),
+    ).then((value) {
+      if ((value == null)) {
+        return;
+      }
+      // _selectedDate = value;  X
+      setState(() {
+        _selectedDate = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,27 +134,15 @@ class _MyHomePage extends State<MyHomePage> {
         ),
       ),
       body: Container(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // alignment: Alignment.center,
-        height: double.infinity,
-        color: w,
-        child: Column(
-          children: [
-            Image.network(
-              'https://static.vecteezy.com/system/resources/thumbnails/025/181/412/small/picture-a-captivating-scene-of-a-tranquil-lake-at-sunset-ai-generative-photo.jpg',
-              height: 200,
-              width: 300,
-              // fit: BoxFit.cover, for Column
-              fit: BoxFit.fitWidth,
-            ),
-            Image.asset(
-              'assets/icons/user.png',
-              fit: BoxFit.fill,
-              height: 400,
-            )
-          ],
-        ),
-      ),
+          // mainAxisAlignment: MainAxisAlignment.center,
+          alignment: Alignment.center,
+          height: double.infinity,
+          color: w,
+          child: ElevatedButton(
+            // ignore: unnecessary_null_comparison
+            child: Text(DateFormat.yMMMd().format(_selectedDate)),
+            onPressed: () => _datePicker(),
+          )),
       floatingActionButton: FloatingActionButton(
         onPressed: () => x(context),
         backgroundColor: w,

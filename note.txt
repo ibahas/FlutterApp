@@ -117,5 +117,9 @@ appBarTheme: appBarTheme([color,titleTextStyle])
 Images: Image.network(['path', fit: boxFit.[center,cover,fill]]) and from local added to assets in pubspec.yaml #images.
 -----
 
-
+-----
+Date picker:  have DateTime, DatePicker, showDatePicker with then.
+Using setState.
+And show value.
+-----
 
