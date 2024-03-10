@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen1.dart';
 
 class screen2 extends StatelessWidget {
-  const screen2({super.key});
+  final String str2;
+
+  const screen2(this.str2, {super.key});
 
   void selectScreen(BuildContext context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-      return const screen1();
+      return const screen1('info 1');
     }));
   }
 
@@ -27,6 +29,10 @@ class screen2 extends StatelessWidget {
                 selectScreen(context),
               },
             ),
+            Text(
+              str2,
+              style: const TextStyle(color: Colors.greenAccent),
+            )
           ],
         ),
       ),

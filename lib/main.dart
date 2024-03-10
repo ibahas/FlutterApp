@@ -21,9 +21,9 @@ class MyHomePage extends StatelessWidget {
   void selectScreen(BuildContext context, int n) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
       if (n == 1) {
-        return const screen1();
+        return const screen1('Info 1');
       }
-      return const screen2();
+      return const screen2('info 2');
     }));
   }
 
