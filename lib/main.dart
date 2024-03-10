@@ -9,8 +9,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      //From this
+      home: null,
+      initialRoute: '/',
+      routes: {
+        //Or this
+        '/': (context) => const MyHomePage(),
+        // When navigating to the "/" route, build the FirstScreen widget.
+        Screen1.routeName: (context) => const Screen1(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        Screen2.routeName: (context) => const Screen2(),
+      },
     );
   }
 }
@@ -18,13 +29,14 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  void selectScreen(BuildContext context, int n) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      if (n == 1) {
-        return const screen1('Info 1');
-      }
-      return const screen2('info 2');
-    }));
+  void selectScreen(BuildContext context, screenClass) {
+    Navigator.of(context).pushNamed(
+      screenClass,
+      arguments: {
+        'id': 10,
+        'title': 'info screen $screenClass',
+      },
+    );
   }
 
   @override
@@ -34,25 +46,26 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Main screen'),
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          InkWell(
-            child:
-                const Text('Screen 1', style: TextStyle(color: Colors.black)),
-            onTap: () => {
-              selectScreen(context, 1),
-            },
-          ),
-          InkWell(
-            child:
-                const Text('Screen 2', style: TextStyle(color: Colors.black)),
-            onTap: () => {
-              selectScreen(context, 2),
-            },
-          ),
-        ],
-      )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              child: const Text(
+                'Screen 1',
+                style: TextStyle(color: Colors.black),
+              ),
+              onTap: () => selectScreen(context, Screen1.routeName),
+            ),
+            InkWell(
+              child: const Text(
+                'Screen 2',
+                style: TextStyle(color: Colors.black),
+              ),
+              onTap: () => selectScreen(context, Screen2.routeName),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

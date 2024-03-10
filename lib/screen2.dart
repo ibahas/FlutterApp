@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen1.dart';
 
-class screen2 extends StatelessWidget {
-  final String str2;
+class Screen2 extends StatelessWidget {
+  const Screen2({Key? key}) : super(key: key);
+  
 
-  const screen2(this.str2, {super.key});
+  static const String routeName = '/screen_2';
+  
 
   void selectScreen(BuildContext context) {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-      return const screen1('info 1');
-    }));
+    Navigator.of(context).pushReplacementNamed(
+      Screen1.routeName,
+      arguments: {
+        'id': 11,
+        'title': 'Info screen1',
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final routeArg =
+        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
+    var id = routeArg['id'];
+    var title = routeArg['title'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Screen 2'),
@@ -30,9 +41,15 @@ class screen2 extends StatelessWidget {
               },
             ),
             Text(
-              str2,
-              style: const TextStyle(color: Colors.greenAccent),
-            )
+              '$id',
+              // 's${routeArg["id"]}',
+              style: const TextStyle(color: Colors.amber),
+            ),
+            Text(
+              '$title',
+              // routeArg['title'],
+              style: const TextStyle(color: Colors.amber),
+            ),
           ],
         ),
       ),
