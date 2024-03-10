@@ -1,93 +1,58 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screen1.dart';
+import 'package:flutter_application_1/screen2.dart';
 
-void main() {
-  runApp(const CupertinoApp(
-    title: 'Navigation Basics',
-    home: FirstRoute(),
-  ));
-}
+void main() => runApp(const MyApp());
 
-class FirstRoute extends StatelessWidget {
-  const FirstRoute({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('First Route'),
-      ),
-      child: Center(
-        child: CupertinoButton(
-          child: const Text('Open route'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(builder: (context) => const SecondRoute()),
-            );
-          },
-        ),
-      ),
+    return const MaterialApp(
+      home: MyHomePage(),
     );
   }
 }
 
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Second Route'),
-      ),
-      child: Row(
-        children: [
-          Center(
-            child: CupertinoButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Go back!'),
-            ),
-          ),
-          Center(
-            child: CupertinoButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) => const ThreeRoute()),
-                );
-              },
-              child: const Text('Open route 2!'),
-            ),
-          ),
-        ],
-      ),
-    );
+  void selectScreen(BuildContext context, int n) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+      if (n == 1) {
+        return const screen1();
+      }
+      return const screen2();
+    }));
   }
-}
-
-class ThreeRoute extends StatelessWidget {
-  const ThreeRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Second Route'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Main screen'),
       ),
-      child: Row(
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: CupertinoButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Go back!'),
-            ),
+          InkWell(
+            child:
+                const Text('Screen 1', style: TextStyle(color: Colors.black)),
+            onTap: () => {
+              selectScreen(context, 1),
+            },
+          ),
+          InkWell(
+            child:
+                const Text('Screen 2', style: TextStyle(color: Colors.black)),
+            onTap: () => {
+              selectScreen(context, 2),
+            },
           ),
         ],
-      ),
+      )),
     );
   }
 }
