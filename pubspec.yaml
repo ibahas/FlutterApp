@@ -61,27 +61,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Galexica
-      fonts:
-        - asset: assets/fonts/Galexica-Regular.ttf
-          weight: 700
-    - family: GalexicaRegular
-    - family: DejaVuSans
-      fonts:
-        - asset: assets/fonts/DejaVuSans.ttf
-          # weight: 700
-    - family: DejaVuSans
-    - family: DejaVuSansMonoBold
-      fonts:
-        - asset: assets/fonts/DejaVuSansMono-bold.ttf
-          # weight: 700
-    - family: DejaVuSansMonoBold
-    - family: DejaVuSansMonoBoldOblique
-      fonts:
-        - asset: assets/fonts/DejaVuSansMono-BoldOblique.ttf
-          # weight: 700
-    - family: DejaVuSansMonoBoldOblique
+  # fonts:
+    # - family: Galexica
+    #   fonts:
+    #     - asset: assets/fonts/Galexica-Regular.ttf
+    #       weight: 700
+    # - family: GalexicaRegular
+    # - family: DejaVuSans
+    #   fonts:
+    #     - asset: assets/fonts/DejaVuSans.ttf
+    #       # weight: 700
+    # - family: DejaVuSans
+    # - family: DejaVuSansMonoBold
+    #   fonts:
+    #     - asset: assets/fonts/DejaVuSansMono-bold.ttf
+    #       # weight: 700
+    # - family: DejaVuSansMonoBold
+    # - family: DejaVuSansMonoBoldOblique
+    #   fonts:
+    #     - asset: assets/fonts/DejaVuSansMono-BoldOblique.ttf
+    #       # weight: 700
+    # - family: DejaVuSansMonoBoldOblique
       # fonts:
       #   - asset: fonts/TrajanPro.ttf
       #   - asset: fonts/TrajanPro_Bold.ttf

@@ -1,91 +1,92 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const CupertinoApp(
+    title: 'Navigation Basics',
+    home: FirstRoute(),
+  ));
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FirstRoute extends StatelessWidget {
+  const FirstRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter app',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        primaryColor: Colors.green,
-        cardColor: Colors.pinkAccent,
-        appBarTheme: const AppBarTheme(
-          color: Colors.green,
-          titleTextStyle: TextStyle(fontFamily: 'DejaVuSansMono-BoldOblique'),
-        ),
-        fontFamily: 'Galexica',
-        // colorSchemeSeed: Colors.amber,
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('First Route'),
       ),
-      home: const MyHomePage(),
+      child: Center(
+        child: CupertinoButton(
+          child: const Text('Open route'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              CupertinoPageRoute(builder: (context) => const SecondRoute()),
+            );
+          },
+        ),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<StatefulWidget> createState() => _MyHomePage();
-}
-
-class _MyHomePage extends State<MyHomePage> {
-  // Container info(String title, Color color) {
-  Widget info(String title, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              color.withOpacity(0.4),
-              color,
-            ],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topLeft,
-          ),
-          borderRadius: BorderRadius.circular(15)),
-      child: Text(title, style: const TextStyle(fontSize: 30)),
-    );
-  }
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.yellowAccent,
-        title: const Text('AppBar title'),
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Second Route'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(8),
-        child: GridView(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            childAspectRatio: 3 / 2,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
+      child: Row(
+        children: [
+          Center(
+            child: CupertinoButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Go back!'),
+            ),
           ),
-          children: <Widget>[
-            // Text('1'),
-            // Text('2'),
-            // Text('3'),
-            info('Title 1', Colors.red),
-            info('Title 2', Colors.pinkAccent),
-            info('Title 3', Colors.green),
-            info('Title 4', Colors.amber),
-            info('Title 5', Colors.black),
-            info('Title 6', Colors.transparent),
-            info('Title 1', Colors.red),
-            info('Title 2', Colors.pinkAccent),
-            info('Title 3', Colors.green),
-            info('Title 4', Colors.amber),
-            info('Title 5', Colors.black),
-            info('Title 6', Colors.transparent),
-          ],
-        ),
+          Center(
+            child: CupertinoButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => const ThreeRoute()),
+                );
+              },
+              child: const Text('Open route 2!'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ThreeRoute extends StatelessWidget {
+  const ThreeRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Second Route'),
+      ),
+      child: Row(
+        children: [
+          Center(
+            child: CupertinoButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Go back!'),
+            ),
+          ),
+        ],
       ),
     );
   }
