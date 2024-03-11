@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'drawer.dart';
 import 'package:flutter_application_1/screen1.dart';
 import 'package:flutter_application_1/screen2.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         //Or this
-        '/': (context) => MyHomePage(),
+        '/': (context) => const MyHomePage(),
         // When navigating to the "/" route, build the FirstScreen widget.
         Screen1.routeName: (context) => const Screen1(),
         // When navigating to the "/second" route, build the SecondScreen widget.
@@ -27,25 +28,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // MyHomePage({super.key});
-  void selectScreen(BuildContext context, screenClass) {
-    Navigator.of(context).pushNamed(
-      screenClass,
-      arguments: {
-        'id': 10,
-        'title': 'info screen $screenClass',
-      },
-    );
-  }
-
-  // ignore: unused_field
   final List<Map<String, Widget>> _pages = [
     {
       'page': const Scaffold(
@@ -91,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
           type: BottomNavigationBarType.shifting,
           onTap: _x1,
           items: const [
-            c(
+            BottomNavigationBarItem(
               backgroundColor: Colors.pinkAccent,
               icon: Icon(Icons.category),
               label: 'Part 1',
@@ -106,31 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         drawerScrimColor: Colors.pinkAccent.withOpacity(0.3),
-        drawer: Drawer(
-          child: ListView(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ListTile(
-                title: const Text(
-                  'Screen 1',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onTap: () => selectScreen(context, Screen1.routeName),
-                subtitle: const Text('Screen 1 info'),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-              ListTile(
-                title: const Text(
-                  'Screen 2',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onTap: () => selectScreen(context, Screen2.routeName),
-                subtitle: const Text('Screen 2 info'),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-            ],
-          ),
-        ),
+        drawer: const MyDrawer(),
       ),
     );
   }

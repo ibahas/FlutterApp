@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/drawer.dart';
 import 'package:flutter_application_1/screen1.dart';
 
 class Screen2 extends StatelessWidget {
@@ -36,6 +37,8 @@ class Screen2 extends StatelessWidget {
           ],
         ),
       ),
+      drawerScrimColor: Colors.blueAccent.withOpacity(0.3),
+      drawer: const MyDrawer(),
     );
   }
 }
