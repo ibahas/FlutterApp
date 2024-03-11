@@ -47,49 +47,38 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Transform(
-              transform: Matrix4.skew(.4,.4),
-              child: Container(
-                color: Colors.red,
-                width: 100,
-                height: 100,
+            Container(
+              width: 300,
+              transform: Matrix4.rotationZ(-20 * (pi / 180))
+                ..translate(0.0, _value, 0),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.deepOrange.shade900,
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                    color: Colors.black26,
+                  ),
+                ],
+              ),
+              child: const Text(
+                'MyShop',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 50,
+                ),
               ),
             ),
-            // Transform.translate(
-            //   offset:  Offset(_value, _value),
-            //   child: Container(
-            //     color: Colors.red,
-            //     width: 100,
-            //     height: 100,
-            //   ),
-            // ),
-            // Transform.scale(
-            //   scale: _value,
-            //   child: Container(
-            //     color: Colors.red,
-            //     width: 100,
-            //     height: 100,
-            //   ),
-            // ),
-            // Transform.rotate(
-            //   angle: (_value) * (pi / 180),
-            //   child: Container(
-            //     color: Colors.red,
-            //     width: _value,
-            //     height: _value,
-            //   ),
-            // ),
-            Text('Value: ${(_value).round()}'),
             Slider(
               value: _value,
-              onChanged: (double val) => setState(() => _value = val),
+              onChanged: (val) => setState(() => _value = val),
               min: 0,
-              max: 150,
-              inactiveColor: Colors.red,
-              activeColor: Colors.greenAccent,
-              divisions: 100,
-              label: 'Value',
-            )
+              max: pi * 2,
+            ),
           ],
         ),
         drawerScrimColor: Colors.pinkAccent.withOpacity(0.3),
