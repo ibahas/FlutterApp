@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'drawer.dart';
 import 'package:flutter_application_1/screen1.dart';
 import 'package:flutter_application_1/screen2.dart';
@@ -42,19 +45,46 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text('Demo'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              color: Colors.red,
-              width: _value,
-              height: _value,
+            Transform(
+              transform: Matrix4.skew(.4,.4),
+              child: Container(
+                color: Colors.red,
+                width: 100,
+                height: 100,
+              ),
             ),
+            // Transform.translate(
+            //   offset:  Offset(_value, _value),
+            //   child: Container(
+            //     color: Colors.red,
+            //     width: 100,
+            //     height: 100,
+            //   ),
+            // ),
+            // Transform.scale(
+            //   scale: _value,
+            //   child: Container(
+            //     color: Colors.red,
+            //     width: 100,
+            //     height: 100,
+            //   ),
+            // ),
+            // Transform.rotate(
+            //   angle: (_value) * (pi / 180),
+            //   child: Container(
+            //     color: Colors.red,
+            //     width: _value,
+            //     height: _value,
+            //   ),
+            // ),
             Text('Value: ${(_value).round()}'),
             Slider(
               value: _value,
               onChanged: (double val) => setState(() => _value = val),
               min: 0,
-              max: 500,
+              max: 150,
               inactiveColor: Colors.red,
               activeColor: Colors.greenAccent,
               divisions: 100,
