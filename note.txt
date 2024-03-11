@@ -150,5 +150,22 @@ drawerScrimColor: Colors.pinkAccent.withOpacity(0.3), #Link modal and bg.
 -----
 TabBar:
 In first convert scaffodd to custom TabBar => DefaultTabController( child : Scaffodd>..., length:int)
-In body: TabBarView(children: as scaffodd... have[appBar[title], body:...])
+In body: TabBarView(children: as scaffodd... have[appBar[title], body:...]),
+-----
+
+-----
+BottomNavigationBar:
+using : [
+    selectedItemColor,
+    unselectedItemColor,
+    currentIndex,
+    selectedFontSize,
+    unselectedFontSize,
+    type,
+    items,
+    onTap => fun to set selected.
+]
+in items : BottomNavigationBarItem(backgroundColor,icon,label,tooltip)
+Creaate custom array of items <String,Widget>...
+List<Map<String,Widget>>  XX = ...[{}].
 -----

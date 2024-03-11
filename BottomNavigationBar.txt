@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           type: BottomNavigationBarType.shifting,
           onTap: _x1,
           items: const [
-            c(
+            BottomNavigationBarItem(
               backgroundColor: Colors.pinkAccent,
               icon: Icon(Icons.category),
               label: 'Part 1',
