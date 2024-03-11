@@ -18,11 +18,6 @@ class Screen1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routeArg =
-        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
-    var id = routeArg['id'];
-    var title = routeArg['title'];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Screen 1'),
@@ -37,16 +32,6 @@ class Screen1 extends StatelessWidget {
               onTap: () => {
                 selectScreen(context),
               },
-            ),
-            Text(
-              '$id',
-              // 's${routeArg["id"]}',
-              style: const TextStyle(color: Colors.amber),
-            ),
-            Text(
-              '$title',
-              // routeArg['title'],
-              style: const TextStyle(color: Colors.amber),
             ),
           ],
         ),

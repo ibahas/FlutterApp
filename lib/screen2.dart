@@ -3,10 +3,8 @@ import 'package:flutter_application_1/screen1.dart';
 
 class Screen2 extends StatelessWidget {
   const Screen2({Key? key}) : super(key: key);
-  
 
   static const String routeName = '/screen_2';
-  
 
   void selectScreen(BuildContext context) {
     Navigator.of(context).pushReplacementNamed(
@@ -20,11 +18,6 @@ class Screen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final routeArg =
-        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
-    var id = routeArg['id'];
-    var title = routeArg['title'];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Screen 2'),
@@ -39,16 +32,6 @@ class Screen2 extends StatelessWidget {
               onTap: () => {
                 selectScreen(context),
               },
-            ),
-            Text(
-              '$id',
-              // 's${routeArg["id"]}',
-              style: const TextStyle(color: Colors.amber),
-            ),
-            Text(
-              '$title',
-              // routeArg['title'],
-              style: const TextStyle(color: Colors.amber),
             ),
           ],
         ),

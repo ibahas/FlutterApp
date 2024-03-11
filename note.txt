@@ -146,3 +146,8 @@ Drawer: child :ListView[children:[ListTile[title,subtitle,onTap]]]...
 endDrawer: ... . #In_Left.
 drawerScrimColor: Colors.pinkAccent.withOpacity(0.3), #Link modal and bg.
 -----
+
+-----
+TabBar:
+In first convert scaffodd to custom TabBar => DefaultTabController( child : Scaffodd>..., length:int)
+-----

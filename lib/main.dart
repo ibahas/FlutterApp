@@ -41,55 +41,64 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main screen'),
-      ),
-      body: const Center(
-          // child: Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     InkWell(
-          //       child: const Text(
-          //         'Screen 1',
-          //         style: TextStyle(color: Colors.black),
-          //       ),
-          //       onTap: () => selectScreen(context, Screen1.routeName),
-          //     ),
-          //     InkWell(
-          //       child: const Text(
-          //         'Screen 2',
-          //         style: TextStyle(color: Colors.black),
-          //       ),
-          //       onTap: () => selectScreen(context, Screen2.routeName),
-          //     ),
-          //   ],
-          // ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Main screen'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.category),
+                text: ('Screen1'),
+              ),
+              Tab(
+                icon: Icon(Icons.star),
+                text: ('Screen2'),
+              ),
+            ],
           ),
-      drawerScrimColor: Colors.pinkAccent.withOpacity(0.3),
-      drawer: Drawer(
-        child: ListView(
-          // mainAxisAlignment: MainAxisAlignment.center,
+        ),
+        body: TabBarView(
           children: [
-            ListTile(
-              title: const Text(
-                'Screen 1',
-                style: TextStyle(color: Colors.black),
+            // Screen1(),
+            // Screen2(),
+            Scaffold(
+              appBar: AppBar(
+                title: const Text('Part 1'),
               ),
-              onTap: () => selectScreen(context, Screen1.routeName),
-              subtitle: const Text('Screen 1 info'),
-              trailing: const Icon(Icons.arrow_forward_ios),
+              body: const Center(child: Text('Text 1')),
             ),
-            ListTile(
-              title: const Text(
-                'Screen 2',
-                style: TextStyle(color: Colors.black),
-              ),
-              onTap: () => selectScreen(context, Screen2.routeName),
-              subtitle: const Text('Screen 2 info'),
-              trailing: const Icon(Icons.arrow_forward_ios),
+            const Scaffold(
+              body: Center(child: Text('Text 2')),
             ),
           ],
+        ),
+        drawerScrimColor: Colors.pinkAccent.withOpacity(0.3),
+        drawer: Drawer(
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ListTile(
+                title: const Text(
+                  'Screen 1',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () => selectScreen(context, Screen1.routeName),
+                subtitle: const Text('Screen 1 info'),
+                trailing: const Icon(Icons.arrow_forward_ios),
+              ),
+              ListTile(
+                title: const Text(
+                  'Screen 2',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () => selectScreen(context, Screen2.routeName),
+                subtitle: const Text('Screen 2 info'),
+                trailing: const Icon(Icons.arrow_forward_ios),
+              ),
+            ],
+          ),
         ),
       ),
     );
