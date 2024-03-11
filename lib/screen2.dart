@@ -8,7 +8,7 @@ class Screen2 extends StatelessWidget {
   const Screen2({super.key});
 
   void selectScreen(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(
+    Navigator.of(context).pushNamed(
       Screen1.routeName,
       arguments: {
         'id': 11,

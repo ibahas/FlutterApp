@@ -7,13 +7,19 @@ class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   void selectScreen(BuildContext context, screenClass) {
-    Navigator.of(context).pushReplacementNamed(
-      screenClass,
-      arguments: {
-        'id': 10,
-        'title': 'info screen $screenClass',
-      },
-    );
+    if (screenClass == '/screen_1') {
+      Navigator.of(context).pushNamed(
+        screenClass,
+        arguments: {
+          'id': 10,
+          'title': 'info screen $screenClass',
+        },
+      ).then((value) => null);
+    } else {
+      Navigator.of(context).pushReplacementNamed(
+        screenClass,
+      );
+    }
   }
 
   @override

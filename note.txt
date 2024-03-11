@@ -169,3 +169,7 @@ in items : BottomNavigationBarItem(backgroundColor,icon,label,tooltip)
 Creaate custom array of items <String,Widget>...
 List<Map<String,Widget>>  XX = ...[{}].
 -----
+
+-----
+When need to use navigator pop need to note this screen created with pushNamed.
+-----
