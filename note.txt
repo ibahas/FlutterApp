@@ -173,3 +173,8 @@ List<Map<String,Widget>>  XX = ...[{}].
 -----
 When need to use navigator pop need to note this screen created with pushNamed.
 -----
+
+-----
+#Slider.
+Slider(value,onChanged () =>,inactiveColor,activeColor,devison,label)
+-----
