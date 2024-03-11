@@ -133,6 +133,16 @@ The total of Expanded / one to get center or like it.
 GridView: gridDelegate[SliverGridDelegateWithMaxCrossAxisExtent => [maxCrossAxisExtent,childAspectRatio,mainAxisSpacing,crossAxisSpacing]], children : [];
 Container: BoxDecoration[gradient => [colors : [],begin,end]];
 color.withOpacity
+-----
 
+-----
+routes: as objectss have : [
+    'PATH' : (context) => Class.
+]
+-----
 
+-----
+Drawer: child :ListView[children:[ListTile[title,subtitle,onTap]]]...
+endDrawer: ... . #In_Left.
+drawerScrimColor: Colors.pinkAccent.withOpacity(0.3), #Link modal and bg.
 -----

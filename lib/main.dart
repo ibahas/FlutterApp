@@ -45,23 +45,49 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Main screen'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: const Center(
+          // child: Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     InkWell(
+          //       child: const Text(
+          //         'Screen 1',
+          //         style: TextStyle(color: Colors.black),
+          //       ),
+          //       onTap: () => selectScreen(context, Screen1.routeName),
+          //     ),
+          //     InkWell(
+          //       child: const Text(
+          //         'Screen 2',
+          //         style: TextStyle(color: Colors.black),
+          //       ),
+          //       onTap: () => selectScreen(context, Screen2.routeName),
+          //     ),
+          //   ],
+          // ),
+          ),
+      drawerScrimColor: Colors.pinkAccent.withOpacity(0.3),
+      drawer: Drawer(
+        child: ListView(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              child: const Text(
+            ListTile(
+              title: const Text(
                 'Screen 1',
                 style: TextStyle(color: Colors.black),
               ),
               onTap: () => selectScreen(context, Screen1.routeName),
+              subtitle: const Text('Screen 1 info'),
+              trailing: const Icon(Icons.arrow_forward_ios),
             ),
-            InkWell(
-              child: const Text(
+            ListTile(
+              title: const Text(
                 'Screen 2',
                 style: TextStyle(color: Colors.black),
               ),
               onTap: () => selectScreen(context, Screen2.routeName),
+              subtitle: const Text('Screen 2 info'),
+              trailing: const Icon(Icons.arrow_forward_ios),
             ),
           ],
         ),
