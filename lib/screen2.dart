@@ -3,9 +3,9 @@ import 'package:flutter_application_1/drawer.dart';
 import 'package:flutter_application_1/screen1.dart';
 
 class Screen2 extends StatelessWidget {
-  const Screen2({Key? key}) : super(key: key);
-
   static const String routeName = '/screen_2';
+
+  const Screen2({super.key});
 
   void selectScreen(BuildContext context) {
     Navigator.of(context).pushReplacementNamed(
