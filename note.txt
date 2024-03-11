@@ -150,4 +150,5 @@ drawerScrimColor: Colors.pinkAccent.withOpacity(0.3), #Link modal and bg.
 -----
 TabBar:
 In first convert scaffodd to custom TabBar => DefaultTabController( child : Scaffodd>..., length:int)
+In body: TabBarView(children: as scaffodd... have[appBar[title], body:...])
 -----
