@@ -186,3 +186,8 @@ height: 100, width : 200 => when value 2 => 100*2, 200 * 2.
 Transform.translate(offset: x,y) // Can be use -x or -y.
 Transform([transform: Matrix4.skew(x,y)])
 -----
+
+-----
+String get resultText => resultsPhrase; ...
+Answers.answersQuestion this function have a param.
+-----
