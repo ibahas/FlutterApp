@@ -1,8 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/quiz.dart';
 import 'package:flutter_application_1/result.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  Future.delayed(const Duration(seconds: 2), () => 2)
+      .then((value) => print('Value is $value'))
+      .catchError((e) => print('Error: $e'));
+
+  print('Value is 0');
+
+  final s1 = Stream.periodic(const Duration(milliseconds: 500), (val) => val);
+  final StreamSubscription<int> sub = s1.listen((_) => _);
+  sub.onData((data) {
+    data > 10 ? sub.cancel() : print(data);
+  });
+
+  //Or we can use async for main() and convert it to int and print it with try,catch.
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -131,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // inactiveTrackColor: Colors.black,
               activeTrackColor: Colors.black,
               activeColor: Colors.white,
-              ),
+            ),
           ],
         ),
         body: Container(
