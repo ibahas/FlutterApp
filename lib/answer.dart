@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'main.dart';
 
 // Update the Answers class to handle passing the score as an argument when the button is pressed
 class Answers extends StatelessWidget {
@@ -13,11 +14,14 @@ class Answers extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.all(10),
-      child: TextButton(
+      child: ElevatedButton(
         onPressed: selectAnswer, // Pass the score as an argument
         child: Text(
           answerText,
-          style: const TextStyle(fontSize: 25),
+          style: const TextStyle(
+            fontSize: 25,
+            // color: isSwitched == true ? Colors.black : Colors.white,
+          ),
         ),
       ),
     );

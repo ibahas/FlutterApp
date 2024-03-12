@@ -191,3 +191,8 @@ Transform([transform: Matrix4.skew(x,y)])
 String get resultText => resultsPhrase; ...
 Answers.answersQuestion this function have a param.
 -----
+
+-----
+appBar: AppBar(actions : [...]). 🔻
+Switch: value, onChanged:(){}, inactiveThumbColor,inactiveTrackColor,activeTrackColor,activeColor...
+-----

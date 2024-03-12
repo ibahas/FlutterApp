@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+bool isSwitched = false;
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
   @override
@@ -112,14 +114,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quiz app'),
-        shadowColor: Colors.greenAccent,
-      ),
-      body: _selectedQuestion != questions.length
-          ? Quiz(questions, _selectedQuestion,
-              answersQuestion as Function(int)) // Correct casting
-          : Result(resetApp, _totalScore),
-    );
+        appBar: AppBar(
+          backgroundColor: Colors.white38,
+          title: const Text('Quiz app'),
+          shadowColor: Colors.greenAccent,
+          actions: [
+            Switch(
+              value: isSwitched,
+              onChanged: (val) {
+                setState(() {
+                  isSwitched = val;
+                });
+              },
+
+              inactiveThumbColor: Colors.black,
+              // inactiveTrackColor: Colors.black,
+              activeTrackColor: Colors.black,
+              activeColor: Colors.white,
+              ),
+          ],
+        ),
+        body: Container(
+          color: isSwitched == true ? Colors.black : Colors.white,
+          child: _selectedQuestion != questions.length
+              ? Quiz(questions, _selectedQuestion,
+                  answersQuestion as Function(int))
+              : Result(resetApp, _totalScore),
+        ) // Correct casting
+        );
   }
 }
