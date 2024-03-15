@@ -1,29 +1,14 @@
-import 'dart:async';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/quiz.dart';
-import 'package:flutter_application_1/result.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  Future.delayed(const Duration(seconds: 2), () => 2)
-      .then((value) => print('Value is $value'))
-      .catchError((e) => print('Error: $e'));
-
-  print('Value is 0');
-
-  final s1 = Stream.periodic(const Duration(milliseconds: 500), (val) => val);
-  final StreamSubscription<int> sub = s1.listen((_) => _);
-  sub.onData((data) {
-    data > 10 ? sub.cancel() : print(data);
-  });
-
-  //Or we can use async for main() and convert it to int and print it with try,catch.
-
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,131 +19,144 @@ class MyApp extends StatelessWidget {
   }
 }
 
-bool isSwitched = false;
-
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //Question selected.
-  var _selectedQuestion = 0;
-  var _totalScore = 0;
+  List<Map<String, dynamic>> posts = [];
 
-  //Reset app.
-  void resetApp() {
-    setState(() {
-      _selectedQuestion = 0;
-      _totalScore = 0;
-    });
+  var MyController = '';
+
+  @override
+  void initState() {
+    super.initState();
+    //Check if shared prefernces have posts or not ?
+    _fetchPosts();
   }
 
-  void answersQuestion(int score) {
-    _totalScore += score;
-    setState(() {
-      _selectedQuestion += 1;
-    });
+  void _fetchPosts() async {
+    bool postsExist = await _checkPostsExist();
+    if (postsExist) {
+      // Posts exist in SharedPreferences, fetch them
+      _loadData();
+    } else {
+      // Posts don't exist in SharedPreferences, fetch them from the network
+      _fetchFromNetwork();
+    }
   }
 
-  //Questions, Answers
-  final List<Map<String, Object>> questions = [
-    {
-      'questionText': 'What\'s your favorite color?',
-      'answers': [
-        {
-          'text': 'Black',
-          'score': 10,
-        },
-        {
-          'text': 'Red',
-          'score': 20,
-        },
-        {
-          'text': 'White',
-          'score': 30,
-        },
-        {
-          'text': 'Blue',
-          'score': 40,
-        },
-      ],
-    },
-    {
-      'questionText': 'What\'s your favorite animal?',
-      'answers': [
-        {
-          'text': 'Rabbit',
-          'score': 10,
-        },
-        {
-          'text': 'Tiger',
-          'score': 20,
-        },
-        {
-          'text': 'Elephant',
-          'score': 30,
-        },
-        {
-          'text': 'Lion',
-          'score': 40,
-        },
-      ],
-    },
-    {
-      'questionText': 'What\'s your favorite instructor?',
-      'answers': [
-        {
-          'text': 'Ibrahim1',
-          'score': 10,
-        },
-        {
-          'text': 'Ibrahim2',
-          'score': 20,
-        },
-        {
-          'text': 'Ibrahim3',
-          'score': 30,
-        },
-        {
-          'text': 'Ibrahim4',
-          'score': 40,
-        },
-      ],
-    },
-  ];
+  Future<void> _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jsonData = prefs.getString('posts');
+    if (jsonData != null) {
+      setState(() {
+        posts = List<Map<String, dynamic>>.from(json.decode(jsonData));
+      });
+    } else {
+      throw Exception('No posts found in SharedPreferences');
+    }
+  }
+
+  Future<void> _fetchFromNetwork() async {
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+    final res = await http.get(Uri.parse(url));
+    if (res.statusCode == 200) {
+      final List<dynamic> fetchedPosts = jsonDecode(res.body);
+      setState(() {
+        posts = List<Map<String, dynamic>>.from(fetchedPosts);
+      });
+      _saveData(); // Save fetched posts in SharedPreferences
+    } else {
+      throw Exception('Failed to load posts');
+    }
+  }
+
+  Future<bool> _checkPostsExist() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.containsKey('posts');
+  }
+
+  Future<void> _saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('posts', json.encode(posts));
+  }
+
+  void _updatePost(int index) {
+    setState(() {
+      // posts[index]['title'] = title;
+      posts[index]['status'] = true;
+    });
+    _saveData();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white38,
-          title: const Text('Quiz app'),
-          shadowColor: Colors.greenAccent,
-          actions: [
-            Switch(
-              value: isSwitched,
-              onChanged: (val) {
-                setState(() {
-                  isSwitched = val;
-                });
-              },
+      appBar: AppBar(
+        title: const Text('Post List'),
+      ),
+      body: ListView.builder(
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          bool status = posts[index]['status'] ?? false;
+          Color tileColor = status ? Colors.green : Colors.black;
+          return ListTile(
+            title: Text(
+              posts[index]['title'] ?? 'No title',
+              style: TextStyle(color: tileColor),
+            ),
+            subtitle: Text(
+              posts[index]['body'] ?? 'No body',
+              style: const TextStyle(color: Colors.black),
+            ),
+            onTap: () {
+              _showCompletionDialog(index);
+            },
+          );
+        },
+      ),
+    );
+  }
 
-              inactiveThumbColor: Colors.black,
-              // inactiveTrackColor: Colors.black,
-              activeTrackColor: Colors.black,
-              activeColor: Colors.white,
+  Future<void> _showCompletionDialog(int index) async {
+    String? result = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Complete Title'),
+          content: TextField(
+            decoration: const InputDecoration(
+              hintText: 'Enter title',
+            ),
+            onChanged: (value) {
+              // Handle text input change
+            },
+            controller: MyController,
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop('Completed');
+              },
+              child: const Text('Save'),
             ),
           ],
-        ),
-        body: Container(
-          color: isSwitched == true ? Colors.black : Colors.white,
-          child: _selectedQuestion != questions.length
-              ? Quiz(questions, _selectedQuestion,
-                  answersQuestion as Function(int))
-              : Result(resetApp, _totalScore),
-        ) // Correct casting
         );
+      },
+    );
+
+    if (result == 'Completed') {
+      _updatePost(index);
+    }
   }
 }
