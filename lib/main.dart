@@ -29,7 +29,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Map<String, dynamic>> posts = [];
 
-  var MyController = '';
+  final myController = TextEditingController();
+
+  var str = '';
 
   @override
   void initState() {
@@ -87,8 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _updatePost(int index) {
     setState(() {
-      // posts[index]['title'] = title;
       posts[index]['status'] = true;
+      posts[index]['note'] = str;
+      //Set empty to str.
+      str = '';
     });
     _saveData();
   }
@@ -104,9 +108,10 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           bool status = posts[index]['status'] ?? false;
           Color tileColor = status ? Colors.green : Colors.black;
+          String note =  posts[index]['note'] ?? '';
           return ListTile(
             title: Text(
-              posts[index]['title'] ?? 'No title',
+              '${posts[index]['title'] ?? 'No title'} $note',
               style: TextStyle(color: tileColor),
             ),
             subtitle: Text(
@@ -133,9 +138,11 @@ class _MyHomePageState extends State<MyHomePage> {
               hintText: 'Enter title',
             ),
             onChanged: (value) {
-              // Handle text input change
+              setState(() {
+                str = myController.text;
+              });
             },
-            controller: MyController,
+            controller: myController,
           ),
           actions: <Widget>[
             TextButton(
