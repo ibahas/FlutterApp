@@ -1,169 +1,151 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_application_1/components/AppLocalizations.dart';
+import 'package:flutter_application_1/components/api_service.dart';
+import 'components/alert.dart';
+import 'app/dashboard.dart';
+import 'config/app.dart';
+import 'login.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(const MyApp());
+  Locale? locale =
+      const Locale('ar'); // Change this to Locale('en') for English
+  // Set environment here
+  AppConfig.setEnvironment(Environment.DEV);
+  runApp(MyApp(locale: locale));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key, this.locale}) : super(key: key);
+
+  final Locale? locale;
+
+  @override
+  _MyAppState createState() => _MyAppState();
+
+  static _MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale? _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _locale = widget.locale;
+  }
+
+  void updateLocale(Locale newLocale) {
+    setState(() {
+      // Update the locale
+      _locale = newLocale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      locale: _locale,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Map<String, dynamic>> posts = [];
+  bool isLogin = false;
 
-  final myController = TextEditingController();
-
-  var str = '';
+  void changeLanguage() {
+    // Get the current locale
+    final currentLocale = Localizations.localeOf(context);
+    // Create a new locale with the opposite language
+    final newLocale = currentLocale.languageCode == 'en'
+        ? const Locale('ar')
+        : const Locale('en');
+    // Set the new locale using MyApp's updateLocale method
+    MyApp.of(context)?.updateLocale(newLocale);
+  }
 
   @override
   void initState() {
     super.initState();
-    //Check if shared prefernces have posts or not ?
-    _fetchPosts();
+    checkToken();
   }
 
-  void _fetchPosts() async {
-    bool postsExist = await _checkPostsExist();
-    if (postsExist) {
-      // Posts exist in SharedPreferences, fetch them
-      _loadData();
-    } else {
-      // Posts don't exist in SharedPreferences, fetch them from the network
-      _fetchFromNetwork();
-    }
-  }
-
-  Future<void> _loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? jsonData = prefs.getString('posts');
-    if (jsonData != null) {
+  Future<void> checkToken() async {
+    final savedToken = await ApiService.getToken();
+    if (savedToken != null && savedToken.isNotEmpty) {
       setState(() {
-        posts = List<Map<String, dynamic>>.from(json.decode(jsonData));
+        isLogin = true;
       });
     } else {
-      throw Exception('No posts found in SharedPreferences');
+      Alert.show(context, 'Login...!', 'error');
     }
-  }
-
-  Future<void> _fetchFromNetwork() async {
-    const url = 'https://jsonplaceholder.typicode.com/posts';
-    final res = await http.get(Uri.parse(url));
-    if (res.statusCode == 200) {
-      final List<dynamic> fetchedPosts = jsonDecode(res.body);
-      setState(() {
-        posts = List<Map<String, dynamic>>.from(fetchedPosts);
-      });
-      _saveData(); // Save fetched posts in SharedPreferences
-    } else {
-      throw Exception('Failed to load posts');
-    }
-  }
-
-  Future<bool> _checkPostsExist() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.containsKey('posts');
-  }
-
-  Future<void> _saveData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('posts', json.encode(posts));
-  }
-
-  void _updatePost(int index) {
-    setState(() {
-      posts[index]['status'] = true;
-      posts[index]['note'] = str;
-      //Set empty to str.
-      str = '';
-    });
-    _saveData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post List'),
-      ),
-      body: ListView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, index) {
-          bool status = posts[index]['status'] ?? false;
-          Color tileColor = status ? Colors.green : Colors.black;
-          String note =  posts[index]['note'] ?? '';
-          return ListTile(
-            title: Text(
-              '${posts[index]['title'] ?? 'No title'} $note',
-              style: TextStyle(color: tileColor),
+        title: Text(isLogin
+            ? AppLocalizations.of(context, 'appTitle') ?? 'App'
+            : AppLocalizations.of(context, 'loginTitle') ?? 'Login'),
+        actions: [
+          if (isLogin)
+            IconButton(
+              onPressed: () async {
+                final success = await logoutRequest();
+                if (success) {
+                  setState(() {
+                    isLogin = false;
+                  });
+                  await ApiService.removeToken();
+                } else {
+                  print('Logout failed');
+                }
+              },
+              tooltip: 'Logout',
+              icon: const Icon(Icons.logout),
             ),
-            subtitle: Text(
-              posts[index]['body'] ?? 'No body',
-              style: const TextStyle(color: Colors.black),
-            ),
-            onTap: () {
-              _showCompletionDialog(index);
-            },
-          );
-        },
+          // Switch to change language
+          IconButton(
+            onPressed: changeLanguage,
+            icon: const Icon(Icons.language),
+          ),
+        ],
       ),
+      body: !isLogin
+          ? Login(
+              loginCallback: () {
+                setState(() {
+                  isLogin = true;
+                });
+              },
+            )
+          : Dashboard(),
     );
   }
 
-  Future<void> _showCompletionDialog(int index) async {
-    String? result = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Complete Title'),
-          content: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Enter title',
-            ),
-            onChanged: (value) {
-              setState(() {
-                str = myController.text;
-              });
-            },
-            controller: myController,
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop('Completed');
-              },
-              child: const Text('Save'),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (result == 'Completed') {
-      _updatePost(index);
+  Future<bool> logoutRequest() async {
+    try {
+      final response = await ApiService.post(AppConfig.logoutUrl, {});
+      return response.statusCode == 200;
+    } catch (e) {
+      print('Error logging out: $e');
+      return false;
     }
   }
 }
