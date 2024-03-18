@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_application_1/components/AppLocalizations.dart';
+import 'package:flutter_application_1/components/api_service.dart';
+import 'package:flutter_application_1/config/app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -10,68 +13,95 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  List<Map<String, dynamic>> posts = [];
+  List<Map<String, dynamic>> audits = [];
   final myController = TextEditingController();
   var str = '';
 
   @override
   void initState() {
     super.initState();
-    // Check if shared preferences have posts or not
-    _fetchPosts();
+    // Check if shared preferences have audits or not
+    _fetchAudits();
   }
 
-  Future<void> _fetchPosts() async {
-    final bool postsExist = await _checkPostsExist();
-    if (postsExist) {
-      // Posts exist in SharedPreferences, fetch them
-      _loadData();
+  Future<bool> _checkWifiConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult == ConnectivityResult.wifi;
+  }
+
+  Future<void> _fetchAudits() async {
+    bool isWifiConnected = await _checkWifiConnection();
+    if (isWifiConnected) {
+      final bool auditsExist = await _checkAuditsExist();
+      if (!auditsExist) {
+        // Audits exist in SharedPreferences, fetch them
+        _loadData();
+      } else {
+        // Audits don't exist in SharedPreferences, fetch them from the network
+        _fetchFromNetwork();
+      }
     } else {
-      // Posts don't exist in SharedPreferences, fetch them from the network
+      // Device is not connected to Wi-Fi, fetch audits from the network
       _fetchFromNetwork();
     }
   }
 
   Future<void> _loadData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? jsonData = prefs.getString('posts');
-    if (jsonData != null) {
-      setState(() {
-        posts = List<Map<String, dynamic>>.from(json.decode(jsonData));
-      });
-    } else {
-      throw Exception('No posts found in SharedPreferences');
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? jsonData = prefs.getString('audits');
+      if (jsonData != null) {
+        setState(() {
+          audits = List<Map<String, dynamic>>.from(jsonDecode(jsonData));
+        });
+      } else {
+        // Audits not found in SharedPreferences
+        print('No audits found in SharedPreferences');
+        // Show user-friendly message or handle the case
+      }
+    } catch (e) {
+      // Handle SharedPreferences read error
+      print('Failed to load audits from SharedPreferences: $e');
+      // Show user-friendly message or handle the case
     }
   }
 
   Future<void> _fetchFromNetwork() async {
-    const url = 'https://jsonplaceholder.typicode.com/posts';
-    final res = await http.get(Uri.parse(url));
-    if (res.statusCode == 200) {
-      final List<dynamic> fetchedPosts = jsonDecode(res.body);
-      setState(() {
-        posts = List<Map<String, dynamic>>.from(fetchedPosts);
-      });
-      _saveData(); // Save fetched posts in SharedPreferences
-    } else {
-      throw Exception('Failed to load posts');
+    try {
+      final res = await ApiService.get(AppConfig.auditsUrl);
+      if (res.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(res.body);
+        final List<dynamic> fetchedAudits = responseData['data'];
+        setState(() {
+          audits = List<Map<String, dynamic>>.from(fetchedAudits);
+        });
+        await _saveData();
+      } else {
+        // Handle HTTP error
+        print('Failed to load audits: ${res.statusCode}');
+        // Show user-friendly message or retry logic
+      }
+    } catch (e) {
+      // Handle network or JSON decoding error
+      print('Failed to load audits: $e');
+      // Show user-friendly message or retry logic
     }
   }
 
-  Future<bool> _checkPostsExist() async {
+  Future<bool> _checkAuditsExist() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.containsKey('posts');
+    return prefs.containsKey('audits');
   }
 
   Future<void> _saveData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('posts', json.encode(posts));
+    await prefs.setString('audits', json.encode(audits));
   }
 
   void _updatePost(int index) {
     setState(() {
-      posts[index]['status'] = true;
-      posts[index]['note'] = str;
+      audits[index]['status'] = true;
+      audits[index]['note'] = str;
       // Set empty to str.
       str = '';
     });
@@ -121,27 +151,39 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, index) {
-          final bool status = posts[index]['status'] ?? false;
-          final Color tileColor = status ? Colors.green : Colors.black;
-          final String note = posts[index]['note'] ?? '';
-          return ListTile(
-            title: Text(
-              '${posts[index]['title'] ?? 'No title'} $note',
-              style: TextStyle(color: tileColor),
+      body: audits.isEmpty
+          ? Center(
+              child: Text(
+                AppLocalizations.of(context, 'No data !') ?? 'No data !',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            )
+          : ListWheelScrollView(
+              diameterRatio: 2,
+              itemExtent: 100,
+              children: audits.map((audit) {
+                final bool status = audit['status'] ?? false;
+                final Color tileColor = status ? Colors.green : Colors.black;
+                final String note = audit['note'] ?? '';
+                return ListTile(
+                  title: Text(
+                    '${audit['title'] ?? 'No title'} $note',
+                    style: TextStyle(color: tileColor),
+                  ),
+                  subtitle: Text(
+                    audit['body'] ?? 'No body',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  onTap: () {
+                    _showCompletionDialog(audits.indexOf(
+                        audit)); // Pass the index of the selected audit
+                  },
+                );
+              }).toList(),
             ),
-            subtitle: Text(
-              posts[index]['body'] ?? 'No body',
-              style: const TextStyle(color: Colors.black),
-            ),
-            onTap: () {
-              _showCompletionDialog(index);
-            },
-          );
-        },
-      ),
     );
   }
 

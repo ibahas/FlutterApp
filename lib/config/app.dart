@@ -6,7 +6,9 @@ class AppConfig {
   static String homeUrl = '';
   static String loginUrl = '';
   static String logoutUrl = '';
-  static String ip = '172.17.16.1';
+  static String groupsUrl = '';
+  static String auditsUrl = '';
+  static String ip = '172.24.96.1';
   // Add more URLs as needed...
 
   static void setEnvironment(Environment env) {
@@ -26,6 +28,9 @@ class AppConfig {
     homeUrl = '$baseUrl/home';
     loginUrl = '$baseUrl/login';
     logoutUrl = '$baseUrl/logout';
+    groupsUrl = '$baseUrl/groups';
+    auditsUrl = '$baseUrl/audits';
+
     // Define more URLs similarly...
   }
 }

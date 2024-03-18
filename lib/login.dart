@@ -48,6 +48,8 @@ class _LoginState extends State<Login> {
         'email': email,
         'password': password,
       });
+    isButtonEnabled = false;
+
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
@@ -96,8 +98,8 @@ class _LoginState extends State<Login> {
             TextField(
               controller: passwordController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context, 'Password') ??
-                    'Password',
+                labelText:
+                    AppLocalizations.of(context, 'Password') ?? 'Password',
                 border: const OutlineInputBorder(),
               ),
               obscureText: true,
@@ -106,7 +108,8 @@ class _LoginState extends State<Login> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: isButtonEnabled ? () => loginUser(context) : null,
-              child: Text(AppLocalizations.of(context, 'loginTitle') ?? 'Login'),
+              child:
+                  Text(AppLocalizations.of(context, 'loginTitle') ?? 'Login'),
             ),
           ],
         ),

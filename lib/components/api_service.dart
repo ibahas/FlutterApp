@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
@@ -9,11 +11,13 @@ class ApiService {
     return prefs.getString('token');
   }
 
+  // final currentLocale = Localizations.localeOf(context as BuildContext);
   static Future<http.Response> post(String url, dynamic body) async {
     final token = await getToken();
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
+      // 'x-Language' :
     };
 
     return await http.post(Uri.parse(url),

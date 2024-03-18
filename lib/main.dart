@@ -98,8 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentLocale = Localizations.localeOf(context);
+
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(isLogin
             ? AppLocalizations.of(context, 'appTitle') ?? 'App'
             : AppLocalizations.of(context, 'loginTitle') ?? 'Login'),
@@ -124,6 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             onPressed: changeLanguage,
             icon: const Icon(Icons.language),
+            tooltip: currentLocale.languageCode == 'ar'
+                ? AppLocalizations.of(context, 'English') ?? 'English'
+                : AppLocalizations.of(context, 'Arabic') ?? 'Arabic',
           ),
         ],
       ),

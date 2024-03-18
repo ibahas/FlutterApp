@@ -7,6 +7,8 @@ class AppLocalizations {
       'loginTitle': 'Login',
       'email_or_id': 'Email or ID',
       'Password': 'Password',
+      'English': 'English',
+      'Arabic': 'العربية'
       // Add more translations here
     },
     'ar': {
@@ -14,6 +16,8 @@ class AppLocalizations {
       'loginTitle': 'تسجيل الدخول',
       'email_or_id': 'البريد الإلكتروني أو الهوية',
       'Password': 'كلمة المرور',
+      'English': 'English',
+      'Arabic': 'العربية'
       // Add more translations here
     },
   };
@@ -22,8 +26,8 @@ class AppLocalizations {
     return _localizedValues[Localizations.localeOf(context).languageCode]?[key];
   }
 
-  static List<Locale> get supportedLocales => [
-        const Locale('en', ''),
-        const Locale('ar', ''),
+  static List<Locale> get supportedLocales => const [
+        Locale('en', ''),
+        Locale('ar', ''),
       ];
 }
