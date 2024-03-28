@@ -1,0 +1,198 @@
+--------------------
+Class...
+
+StatelessWidget.
+MaterialApp.
+Scaffodd.
+Center.
+Text.
+---------------------
+
+----
+AppBar
+leading
+title
+actions
+ Icon
+----
+
+----
+Colors. ....
+Container child: children... .
+alignment: Alignment.center, spaceAround, spaceEvenly, spaceBetween.
+----
+
+----
+Column
+Row
+mainAxisAlignment
+----
+
+----
+FontWight
+FontStyle
+height
+shadow : color, bluerRadius, offset
+decoraion : TextDecoration[.combain,.underline,overline,.lineThrough].
+decorationStyle: TextDecorationStyle [.dotted,.solid,.dashed,.wavy,.double]
+----
+
+----
+TextButton: [onPressed, child]
+TextButton.icon : [onPressed, icon, label]
+OutlinedButton...
+ElevatedButton...
+----
+
+----
+In button :
+style : backgroundColor [MaterialStateProperty.all(Colors.###)], padding:[MaterialStateProperty.[all,fromLTRB(....)]]
+using function to show  msg.
+appBar : elevation: double.
+----
+
+----
+Floating action button...
+FloatingActionButton
+FloatingActionButton.extended [label,icon, backgroundColor, foregroundColor, shape[....borderRadius,side]]
+BorderRadius.all ([Radius.[circular,elliptical,zero]])
+floatingActionButtonLocation. ### centerFloat
+----
+
+----
+StatefullWidget
+SetState
+call a function on pressed.
+----
+
+----
+Container of widgets.
+TextField: decoraion => InputDecoration[labelText, hintText, labelStyle,hintStyle,maxLines,prefixText,suffixText] #TextStyle[fontSize],
+keyboardType: TextInputType.[text,name,...]
+SingleChildScrollView
+suffixIcon
+fillColor
+filled
+enabledBorder: OutlineInputBorder...
+----
+
+----
+textAlign: textAlign.[center,...] 
+TextField: controller
+----
+
+----
+padding:<Widget> : padding : EdgeInsets[all,fromLTRB,only[top,right...]]
+----
+
+
+----
+Convert Text to class MyText()
+----
+
+----
+Stack: alignment:[AlignmentDirectional.[topStart,topCenter...], Alignment.[topRight,topLeft,centerLeft...]]
+----
+
+----
+Map function in list.
+List<Info> li =[]
+----
+
+----
+ListView,ListView.builder[itemCount,itemBuilder#return...]
+----
+
+----
+Ex: Using Theme...Theme.of(ctx).cardColor.
+ShowModalBottomSheet().
+----
+
+----
+Import a file font from external, in assets.
+appBarTheme: appBarTheme([color,titleTextStyle])
+----
+
+-----
+Images: Image.network(['path', fit: boxFit.[center,cover,fill]]) and from local added to assets in pubspec.yaml #images.
+-----
+
+-----
+Date picker:  have DateTime, DatePicker, showDatePicker with then.
+Using setState.
+And show value.
+-----
+
+-----
+Expanded : 
+Expanded: flex: int ,child : Widget.
+The total of Expanded / one to get center or like it.
+-----
+
+-----
+GridView: gridDelegate[SliverGridDelegateWithMaxCrossAxisExtent => [maxCrossAxisExtent,childAspectRatio,mainAxisSpacing,crossAxisSpacing]], children : [];
+Container: BoxDecoration[gradient => [colors : [],begin,end]];
+color.withOpacity
+-----
+
+-----
+routes: as objectss have : [
+    'PATH' : (context) => Class.
+]
+-----
+
+-----
+Drawer: child :ListView[children:[ListTile[title,subtitle,onTap]]]...
+endDrawer: ... . #In_Left.
+drawerScrimColor: Colors.pinkAccent.withOpacity(0.3), #Link modal and bg.
+-----
+
+-----
+TabBar:
+In first convert scaffodd to custom TabBar => DefaultTabController( child : Scaffodd>..., length:int)
+In body: TabBarView(children: as scaffodd... have[appBar[title], body:...]),
+-----
+
+-----
+BottomNavigationBar:
+using : [
+    selectedItemColor,
+    unselectedItemColor,
+    currentIndex,
+    selectedFontSize,
+    unselectedFontSize,
+    type,
+    items,
+    onTap => fun to set selected.
+]
+in items : BottomNavigationBarItem(backgroundColor,icon,label,tooltip)
+Creaate custom array of items <String,Widget>...
+List<Map<String,Widget>>  XX = ...[{}].
+-----
+
+-----
+When need to use navigator pop need to note this screen created with pushNamed.
+-----
+
+-----
+#Slider.
+Slider(value,onChanged () =>,inactiveColor,activeColor,devison,label)
+-----
+
+-----
+Transform.rotate([angle=>[pi/4]])// And pi is 180 ., or angle= _value * (pi/180) ... 
+Transform.scale(scale as int)// When plus 1 will be add same width,height * value for ex :
+height: 100, width : 200 => when value 2 => 100*2, 200 * 2.
+Transform.translate(offset: x,y) // Can be use -x or -y.
+Transform([transform: Matrix4.skew(x,y)])
+-----
+
+-----
+String get resultText => resultsPhrase; ...
+Answers.answersQuestion this function have a param.
+-----
+
+-----
+appBar: AppBar(actions : [...]). 🔻
+Switch: value, onChanged:(){}, inactiveThumbColor,inactiveTrackColor,activeTrackColor,activeColor...
+-----

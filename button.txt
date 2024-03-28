@@ -1,0 +1,199 @@
+ ElevatedButton.icon(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                        foregroundColor: MaterialStateProperty.all(Colors.white),
+                        padding: MaterialStateProperty.all(const EdgeInsets.fromLTRB(5, 0, 10, 30)),
+                        // elevation: MaterialStateProperty.all(0)
+                        ),
+
+                    onPressed: null,
+                    icon: const Icon(
+                      Icons.menu_book,
+                      // color: Colors.blue,
+                    ),
+                    label: const Text('C'),
+                  )
+
+
+
+---------------------------------=----------------
+
+  buttonOnPressed(msg) {
+    print('Button clicked $msg');
+  }
+
+ Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        print('CC');
+                      },
+                      icon: const Icon(Icons.media_bluetooth_off)),
+                  IconButton(
+                      onPressed: () => print('CC !'),
+                      icon: const Icon(Icons.media_bluetooth_off)),
+                  IconButton(
+                      onPressed: () => buttonOnPressed('Icon Button ...'),
+                      icon: const Icon(Icons.media_bluetooth_off)),
+                ],
+              ),
+---------------------------------=----------------
+ floatingActionButton: FloatingActionButton(
+          onPressed: () => buttonOnPressed('+'),
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.red,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              side: BorderSide(
+                color: Colors.red,
+                width: 6,
+                style: BorderStyle.solid,
+              )),
+          splashColor: Colors.green,
+          child: const Icon(Icons.add),
+        ),
+---------------------------------=----------------
+floatingActionButton: FloatingActionButton.extended(
+          label: const Text('Add'),
+          onPressed: () => buttonOnPressed('+'),
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.red,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              side: BorderSide(
+                color: Colors.red,
+                width: 6,
+                style: BorderStyle.solid,
+              )),
+          splashColor: Colors.green,
+          icon: const Icon(Icons.add),
+        ),
+---------------------------------=----------------
+Container(
+                margin: const EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: TextField(
+                  decoration: InputDecoration(
+                      fillColor: b,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(width: 2, color: g),
+                      ),
+                      labelText: 'Name',
+                      labelStyle: TextStyle(fontSize: 30, color: r),
+                      hintText: 'Enter name',
+                      hintStyle: TextStyle(fontSize: 20, color: w),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: bl,
+                      )),
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.text,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: TextField(
+                  decoration: InputDecoration(
+                      fillColor: b,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(width: 2, color: g),
+                      ),
+                      labelText: 'Email',
+                      labelStyle: TextStyle(fontSize: 30, color: r),
+                      hintText: 'Enter email',
+                      hintStyle: TextStyle(fontSize: 20, color: w),
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: bl,
+                      )),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: TextField(
+                  decoration: InputDecoration(
+                      fillColor: b,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(width: 2, color: g),
+                      ),
+                      labelText: 'Password',
+                      labelStyle: TextStyle(fontSize: 30, color: r),
+                      hintText: 'Enter password',
+                      hintStyle: TextStyle(fontSize: 20, color: w),
+                      suffixIcon: IconButton(
+                          onPressed: () => onPressedPassword(),
+                          icon: Icon(
+                            passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: bl,
+                          ))),
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: passwordVisible,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: TextField(
+                  decoration: InputDecoration(
+                      prefixText: '+970   ',
+                      suffixText: '###',
+                      fillColor: b,
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(width: 2, color: g),
+                      ),
+                      labelText: 'Phone',
+                      labelStyle: TextStyle(fontSize: 30, color: r),
+                      hintText: 'Enter phone',
+                      hintStyle: TextStyle(fontSize: 20, color: w),
+                      prefixIcon: Icon(
+                        Icons.phone,
+                        color: bl,
+                      )),
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: IconButton(
+                  // color: g,
+                  padding: const EdgeInsets.all(10),
+                  onPressed: () => setState(() {
+                    str = myController.text;
+                  }),
+                  icon: Icon(
+                    Icons.send,
+                    color: w,
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  str,
+                  style: TextStyle(color: w),
+                ),
+              ),
+
+---------------------------------=----------------
+
+  onPressedPassword() {
+    setState(() {
+      passwordVisible = !passwordVisible;
+    });
+  }
+
+---------------------------------=----------------
